@@ -296,6 +296,10 @@ class WhistlerBot(object):
         self.client.register_plugin("xep_0199") # XMPP Ping
         self.client.register_plugin("xep_0045") # Multi-User Chat
 
+        if len(self.server) == 2:
+            domain, port = self.server
+            self.client._expected_server_name = domain
+
         if self.client.connect(self.server or ()):
             if self.use_tls:
                 self.log.info("starting TLS...")
